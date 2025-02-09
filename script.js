@@ -41,9 +41,9 @@ function displayError(message) {
     }
 }
 
-//Após o carregamento da página, esconde a mensagem de erro
+// Após o carregamento da página, esconde a mensagem de erro
 document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById(ERROR_MESSAGE_ELEMENT_ID).classList.add('hidden');
+    document.getElementById(ERROR_MESSAGE_ELEMENT_ID).classList.add('active');
 });
 
     // IDs das ligas organizados por ano e liga
