@@ -26,15 +26,25 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById(LOADING_ELEMENT_ID).classList.add('hidden');
     }
 
-    // Função para exibir mensagens de erro
-    function displayError(message) {
-        console.error(message);
-        const errorElement = document.getElementById(ERROR_MESSAGE_ELEMENT_ID);
-        if (errorElement) {
-            errorElement.textContent = message;
-            errorElement.classList.remove('hidden'); // Mostra o elemento de erro
-        }
+// Função para exibir mensagens de erro
+function displayError(message) {
+    console.error(message);
+    const errorElement = document.getElementById(ERROR_MESSAGE_ELEMENT_ID);
+    if (errorElement) {
+        errorElement.textContent = message;
+        errorElement.classList.remove('hidden'); // Mostra o elemento de erro
+          // Esconde a mensagem de erro após alguns segundos
+        setTimeout(() => {
+            errorElement.classList.add('hidden');
+            console.log("Mensagem de erro ocultada");
+        }, 5000); // 5000 milissegundos = 5 segundos
     }
+}
+
+//Após o carregamento da página, esconde a mensagem de erro
+document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById(ERROR_MESSAGE_ELEMENT_ID).classList.add('hidden');
+});
 
     // IDs das ligas organizados por ano e liga
     const leagueIds = {
@@ -66,15 +76,15 @@ document.addEventListener('DOMContentLoaded', function () {
     // Função para mostrar as tabelas das ligas
     function showLeagueTables() {
         console.log('showLeagueTables chamado');
-        document.getElementById(CAMPEOES_CONTAINER_ID).classList.add('hidden');
-        document.getElementById(TABLES_CONTAINER_ID).classList.remove('hidden');
+        document.getElementById(CAMPEOES_CONTAINER_ID).classList.remove('active');
+        document.getElementById(TABLES_CONTAINER_ID).classList.add('active');
     }
 
     // Função para mostrar a tabela de campeões
     function showCampeoesTable() {
         console.log("showCampeoesTable chamado");
-        document.getElementById(TABLES_CONTAINER_ID).classList.add('hidden');
-        document.getElementById(CAMPEOES_CONTAINER_ID).classList.remove('hidden');
+        document.getElementById(TABLES_CONTAINER_ID).classList.remove('active');
+        document.getElementById(CAMPEOES_CONTAINER_ID).classList.add('active');
     }
 
     // Função para definir o botão ativo
@@ -144,6 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Função para carregar os dados das ligas
     function loadLeagueData(leagueIds) {
         leagueData.length = 0; // Limpa os dados anteriores
+        console.clear(); // Limpa o console
         showLoading(); // Mostra o indicador de carregamento
         Promise.all(leagueIds.map((leagueId, index) => fetchLeagueData(leagueId, index + 1)))
             .then(data => {
@@ -379,7 +390,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-   //*** FUNÇÕES DE ESTILO ***//
+      //*** FUNÇÕES DE ESTILO ***//
     function setActiveButton(button) {
         console.log("setActiveButton chamado com:", button);
         const buttons = document.querySelectorAll(SIDEBAR_BUTTON_SELECTOR + ', ' + MOBILE_MENU_BUTTON_SELECTOR);

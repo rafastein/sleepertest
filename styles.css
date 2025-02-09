@@ -141,7 +141,7 @@ h2 {
 
 /* Container das tabelas */
 #tables-container {
-    display: flex;
+    display: none; /* Oculta por padrão */
     width: 100%;
     padding: 0 1.25rem;
     flex: 1;
@@ -150,6 +150,7 @@ h2 {
 }
 
 #tables-container.active {
+    display: flex; /* Exibe quando a classe 'active' está presente */
     height: auto;
 }
 
@@ -266,6 +267,15 @@ table tr:hover {
     text-align: center;
 }
 
+#campeoes-container:not(.active) {
+    display: none;
+}
+
+/* Garante que a seção de campeões seja exibida quando a classe 'active' está presente */
+#campeoes-container.active {
+    display: block;
+}
+
 /* Remove a margem esquerda em telas menores */
 @media (max-width: 768px) {
     #campeoes-container {
@@ -283,7 +293,6 @@ table tr:hover {
     overflow: hidden;
     box-shadow: var(--box-shadow);
     display: table;
-    table-layout: fixed;
 }
 
 #campeoesTable th {
@@ -308,68 +317,6 @@ table tr:hover {
 }
 
 #campeoesTable tbody tr:hover {
-    background-color: var(--table-row-hover-color);
-    transition: background-color 0.3s ease;
-}
-
-/* Esconde a seção de ranking combinado e tabelas das ligas por padrão */
-.hidden {
-    display: none;
-}
-
-/* Ajusta o tamanho das tabelas e centraliza a tabela de ranking combinado */
-#combined-table-container {
-    max-width: 100%;
-    margin: 0 0;
-    padding: 0;
-    background-color: #293142;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    flex: 1; /* Garante que ocupe todo o espaço horizontal restante */
-}
-
-#combinedTable {
-    width: auto;
-    border-collapse: collapse;
-    background-color: #16213e;
-    border-radius: var(--border-radius);
-    overflow: hidden;
-    box-shadow: var(--box-shadow);
-    font-size: 0.675rem;
-    display: block;
-    table-layout: fixed;
-}
-
-#combinedTable th,
-#combinedTable td {
-    padding: 0.375rem;
-    text-align: center;
-    border-bottom: 1px solid #3e4452;
-    font-size: 0.75rem;
-    height: 1.875rem;
-}
-
-/* Impede a quebra de palavras nos cabeçalhos da tabela combinada */
-#combinedTable th {
-    white-space: nowrap;
-}
-
-#combinedTable th {
-    background-color: var(--table-header-color);
-    color: var(--text-color);
-    font-weight: 600;
-    position: sticky;
-    top: 0;
-    z-index: 1;
-    min-height: 1.875rem;
-    height: auto;
-    line-height: 1.2;
-}
-
-#combinedTable tbody tr:hover {
     background-color: var(--table-row-hover-color);
     transition: background-color 0.3s ease;
 }
